@@ -1,0 +1,24 @@
+{
+  "name": "grimbot",
+  "version": "0.0.1",
+  "description": "twitter grimoire bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CraigLager/grimbot.git"
+  },
+  "keywords": [
+    "twitter",
+    "grimoire",
+    "bot"
+  ],
+  "author": "Craig Lager <lager.craig@gmail.com> (http://craiglager.co.uk)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CraigLager/grimbot/issues"
+  },
+  "homepage": "https://github.com/CraigLager/grimbot#readme"
+}
