@@ -5,7 +5,11 @@ var request = require('sync-request');
 var chalk = require('chalk');
 var twitter = require('twitter');
 
-main();
+exports.handler = function index(){
+    main();
+}
+
+
 
 /*
 Description: main process
