@@ -1,5 +1,7 @@
+require('dotenv').config();
 var request = require('sync-request');
 var chalk = require('chalk');
+var twitter = require('twitter');
 
 var excerpt;
 
@@ -23,6 +25,22 @@ console.log("-----------------------------------------")
 console.log(excerpt.identifier);
 //console.log(excerpt.content);
 console.log('https://www.grimoire.org/' + excerpt.uid);
+
+function tweetExcerpt(excerpt){
+
+var client = new Twitter({
+  consumer_key: process.env.TWITTER_CONSUMER_KEY,
+  consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+  bearer_token: process.env.TWITTER_BEARER_TOKEN
+});
+
+  client.post('statuses/update', {status: 'I Love Twitter'},  function(error, tweet, response) {
+  if(error) throw error;
+  console.log(tweet);  // Tweet body. 
+  console.log(response);  // Raw response object. 
+});
+
+}
 
 function getRandomExcerpt(grimoire) {
     var res = request('GET', 'https://www.grimoire.org/api/v1/node/' + grimoire.uid + '/excerpt');
