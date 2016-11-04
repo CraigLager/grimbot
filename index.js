@@ -74,7 +74,7 @@ Pamameters:
 Returns: an excerpt. Undefined if grimoire is empty (???)
 */
 function getRandomExcerpt(grimoire) {
-    var res = request('GET', 'https://www.grimoire.org/api/v1/node/' + grimoire.uid + '/excerpt');
+    var res = request('GET', 'https://www.grimoire.org/api/v1/node/' + grimoire.uid + '/excerpt?limit=1&random=true');
     var data = JSON.parse(res.getBody('utf8'));
     var selectedExcerpt = data[rand(0, data.length - 1)];
     return selectedExcerpt;
@@ -87,7 +87,7 @@ Returns: random grimoire
 */
 function getRandomGrimoire() {
     //https://www.grimoire.org/api/v1/label/grimoire
-    var res = request('GET', 'https://www.grimoire.org/api/v1/label/grimoire');
+    var res = request('GET', 'https://www.grimoire.org/api/v1/label/grimoire?limit=1&random=true');
     var data = JSON.parse(res.getBody('utf8'));
     var selectedGrimoire = data[rand(0, data.length - 1)].props;
     return selectedGrimoire;
