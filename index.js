@@ -26,15 +26,18 @@ console.log(excerpt.identifier);
 //console.log(excerpt.content);
 console.log('https://www.grimoire.org/' + excerpt.uid);
 
+tweetExcerpt(excerpt);
+
 function tweetExcerpt(excerpt){
 
 var client = new Twitter({
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
   consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
-  bearer_token: process.env.TWITTER_BEARER_TOKEN
+  access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
+  access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 });
 
-  client.post('statuses/update', {status: 'I Love Twitter'},  function(error, tweet, response) {
+  client.post('statuses/update', {status: excerpt.identifier + "\n" + 'https://www.grimoire.org/' + excerpt.uid},  function(error, tweet, response) {
   if(error) throw error;
   console.log(tweet);  // Tweet body. 
   console.log(response);  // Raw response object. 
