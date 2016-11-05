@@ -1,4 +1,4 @@
-// https://blog.mousereeve.com/api-access-to-grimoire-org/
+    // https://blog.mousereeve.com/api-access-to-grimoire-org/
 require('dotenv').config();
 
 var request = require('sync-request');
@@ -55,12 +55,21 @@ function tweetExcerpt(excerpt) {
         access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
     });
 
-    var length = excerpt.identifier.length * 2 + 5 + "https://www.grimoire.org/excerpt/".length;
-    var remaining = 140 - length;
+    var url = shortenUrl('https://www.grimoire.org/excerpt/' + excerpt.uid);
+    console.log(url);
+    var length = (excerpt.identifier + "\n" + "...\n" + url).length;
+    //console.log(length);
+
+    var remaining = 140 - length - 2;
     var contents = excerpt.content.substring(0, remaining);
 
-    client.post('statuses/update', { status: excerpt.identifier + "\n" + contents + "...\n" + 'https://www.grimoire.org/excerpt/' + excerpt.uid }, function(error, tweet, response) {
-        if (error) throw error;
+    console.log((excerpt.identifier + "\n" + contents + "...\n" + url).length);
+
+    client.post('statuses/update', { status: excerpt.identifier + "\n" + contents + "...\n" + url }, function(error, tweet, response) {
+        if (error){
+            console.log(error);
+          throw error;  
+        } 
     });
 }
 
@@ -101,4 +110,16 @@ function rand(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min)) + min;
+}
+
+/*
+Description: shorten a URL
+Parameters:
+    url: url to shorten
+Returns: bitly url
+*/
+function shortenUrl(url){
+    var res = request('GET', 'https://api-ssl.bitly.com/v3/shorten?access_token=' +  process.env.BITLY_OAUTH + '&longUrl=' + encodeURI(url));
+    var data = JSON.parse(res.getBody('utf8'));
+    return data.data.url;
 }
