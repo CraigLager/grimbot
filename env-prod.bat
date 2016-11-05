@@ -1,0 +1,1 @@
+copy /y env-prod.env .env
