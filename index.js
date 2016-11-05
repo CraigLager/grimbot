@@ -5,11 +5,9 @@ var request = require('sync-request');
 var chalk = require('chalk');
 var twitter = require('twitter');
 
-exports.handler = function index(){
+exports.handler = function index() {
     main();
 }
-
-
 
 /*
 Description: main process
@@ -50,7 +48,6 @@ Pamameters:
 Returns: nothing
 */
 function tweetExcerpt(excerpt) {
-
     var client = new twitter({
         consumer_key: process.env.TWITTER_CONSUMER_KEY,
         consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
@@ -64,11 +61,7 @@ function tweetExcerpt(excerpt) {
 
     client.post('statuses/update', { status: excerpt.identifier + "\n" + contents + "...\n" + 'https://www.grimoire.org/excerpt/' + excerpt.uid }, function(error, tweet, response) {
         if (error) throw error;
-        //console.log(tweet);  // Tweet body. 
-        //console.log(response);  // Raw response object. 
-        console.log("Reading finished.")
     });
-
 }
 
 /*
