@@ -42,6 +42,17 @@ function main() {
 }
 
 /*
+Description: cleans up excerpt content
+Pamameters:
+    content to clean up
+Returns: cleaned content
+*/
+function cleanContent(content)
+{
+    content = content.replace("<pre>","").replace("</pre>","").replace("<PRE>","").replace("</PRE>","");
+}
+
+/*
 Description: tweets an excerpt using credentials set in env
 Pamameters:
     excerpt: the excerpt to tweet
