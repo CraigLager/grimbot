@@ -50,6 +50,7 @@ Returns: cleaned content
 function cleanContent(content)
 {
     content = content.replace("<pre>","").replace("</pre>","").replace("<PRE>","").replace("</PRE>","");
+    return content;
 }
 
 /*
