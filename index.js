@@ -72,7 +72,7 @@ function tweetExcerpt(excerpt) {
     //console.log(length);
 
     var remaining = 140 - length - 2;
-    var contents = excerpt.content.substring(0, remaining);
+    var contents = cleanContent(excerpt.content).substring(0, remaining);
 
     console.log((excerpt.identifier + "\n" + contents + "...\n" + url).length);
 
